@@ -21,7 +21,7 @@ const BookingModal = ({ treatment, setTreatement, appointmentDate }) => {
             phone
         }
         console.log(booking)
-        setTreatement(null);
+        setTreatement({});
     }
 
     return (
