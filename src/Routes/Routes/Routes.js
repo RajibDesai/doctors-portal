@@ -4,8 +4,12 @@ import Home from "../../Paiges/Home/Home/Home";
 import Login from "../../Paiges/Login/Login";
 import Appointment from "../../Paiges/Appointment/Appointment/Appointment";
 import Signup from "../../Paiges/Signup/Signup";
-import DashBoard from "../../Paiges/DashBoard/DashBoard/DashBoard";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
+import MyAppointment from "../../Paiges/DashBoard/MyAppointment/MyAppointment";
+import AllUsers from "../../Paiges/DashBoard/AllUsers/AllUsers";
+import AdminRoute from "../AdminRoute/AdminRoute";
+
 
 export const router = createBrowserRouter([
     {
@@ -28,10 +32,21 @@ export const router = createBrowserRouter([
                 path:'/appointment',
                 element:<Appointment></Appointment>
             },
+            
+        ]
+    },
+    {
+        path:'/dashboard',
+        element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        children:[
             {
                 path:'/dashboard',
-                element:<PrivateRoute><DashBoard></DashBoard></PrivateRoute>
-            }
+                element:<MyAppointment></MyAppointment>
+            },
+            {
+                path:'/dashboard/allusers',
+                element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
+            },
         ]
     }
 ])
