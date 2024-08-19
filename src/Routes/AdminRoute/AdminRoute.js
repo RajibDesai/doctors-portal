@@ -4,15 +4,16 @@ import { Navigate, useLocation } from 'react-router-dom';
 import useAdmin from '../../hooks/useAdmin';
 
 const AdminRoute = ({ children }) => {
-    const { user,loading } = useContext(AuthContext);
-    const [isAdmin,isAdminLoading] = useAdmin(user?.email);
+    const { user, loading } = useContext(AuthContext);
+    // call useAdmin hooks and set email as parameter
+    const [isAdmin, isAdminLoading] = useAdmin(user?.email);
     const location = useLocation();
 
-    if(loading && isAdminLoading){
+    if (loading && isAdminLoading) {
         return <p className='h-72 flex justify-center items-center'><span className="loading loading-ring loading-lg"></span></p>
     }
 
-    if (user && isAdmin) {
+    if (isAdmin) {
         return children;
     }
 

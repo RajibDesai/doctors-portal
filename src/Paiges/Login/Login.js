@@ -10,7 +10,8 @@ const Login = () => {
     const { signIn } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
 
-    const [loginUserEmail,setLoginUserEmail] = useState('');
+    const [loginUserEmail, setLoginUserEmail] = useState('');
+    // call useToken hooks and set email as paramiter
     const [token] = useToken(loginUserEmail);
 
     const location = useLocation();
@@ -18,10 +19,10 @@ const Login = () => {
 
     const from = location.state?.from?.pathname || '/';
 
-    useEffect(()=>{
-        if(token){
-        navigate(from, { replace: true });
-    }
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+        }
     })
 
     const handleLogin = (data) => {
@@ -32,7 +33,7 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 setLoginUserEmail(data.email)
-              
+
             })
             .catch(error => {
                 console.log(error.message);

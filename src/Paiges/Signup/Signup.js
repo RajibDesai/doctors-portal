@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
@@ -12,12 +12,16 @@ const Signup = () => {
     const [signupError, setSignupError] = useState('');
 
     const [createdUserEmail, setCreatedUserEmail] = useState('');
-    const [token] = useToken(createdUserEmail);
+    // call useToken hooks and set email as paramiter
+    const [token] = useToken(createdUserEmail); 
     const navigate = useNavigate();
 
-    if (token) {
-        navigate('/')
-    }
+    useEffect(() => {
+        if (token) {
+            navigate('/')
+        }
+    },)
+
 
     const handleSignUp = (data) => {
         console.log(data);
@@ -44,7 +48,7 @@ const Signup = () => {
 
     const saveUserToMoDb = (name, email) => {
         const user = { name, email };
-        fetch('http://localhost:5000/users', {
+        fetch('https://doctors-portal-server-ochre-seven.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
